@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍎 TopDevice - Прайс на технику Apple</title>
+    <style>
+        :root {
+            --apple-red: #ff3b30;
+            --apple-blue: #007aff;
+            --apple-green: #34c759;
+            --apple-yellow: #ffcc00;
+            --apple-gray: #f2f2f7;
+            --apple-dark: #1c1c1e;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--apple-gray);
+            color: var(--apple-dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--apple-red), var(--apple-blue));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        
+        .date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .search-container {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            z-index: 100;
+        }
+        
+        #search {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        #search:focus {
+            border-color: var(--apple-blue);
+            box-shadow: 0 0 0 3px rgba(0,122,255,0.1);
+        }
+        
+        .category {
+            margin-bottom: 2.5rem;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .category-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .category-header.cables {
+            background-color: var(--apple-blue);
+        }
+        
+        .category-header.chargers {
+            background-color: var(--apple-green);
+        }
+        
+        .category-header.airpods {
+            background-color: #000;
+        }
+        
+        .category-header.iphones {
+            background: linear-gradient(135deg, #ff2d55, #5856d6);
+        }
+        
+        .category-header.watches {
+            background-color: var(--apple-red);
+        }
+        
+        .category-header.ipads {
+            background: linear-gradient(135deg, #5856d6, #ff2d55);
+        }
+        
+        .category-icon {
+            margin-right: 0.8rem;
+            font-size: 1.5rem;
+        }
+        
+        .product-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .product-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        
+        .product-item:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+        
+        .product-name {
+            flex-grow: 1;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: var(--apple-red);
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+        }
+        
+        .disclaimer {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+        }
+        
+        .disclaimer h3 {
+            margin-top: 0;
+            color: var(--apple-blue);
+        }
+        
+        .contact-info {
+            background-color: var(--apple-dark);
+            color: white;
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+            border-radius: 12px;
+        }
+        
+        .contact-info a {
+            color: var(--apple-blue);
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .product-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .product-price {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🍎 TopDevice - Прайс на технику Apple</h1>
+        <div class="date">Актуально на 08/05/2025</div>
+    </header>
+    
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Поиск товара (например, iPhone 16 или AirPods Pro)" aria-label="Поиск товара">
+        </div>
+        
+        <div class="category">
+            <div class="category-header cables">
+                <span class="category-icon">⚡️</span>
+                <h2>Кабели и адаптеры</h2>
+            </div>
+            <ul class="product-list" id="cables">
+                <li class="product-item">
+                    <span class="product-name">Кабель Apple USB-LIGHTNING (100% оригинал)</span>
+                    <span class="product-price">1 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кабель Apple TYPE-C-LIGHTNING (100% оригинал)</span>
+                    <span class="product-price">1 300 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кабель Apple TYPE-C-TYPE-C (100% оригинал)</span>
+                    <span class="product-price">1 800 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Блок 20w original</span>
+                    <span class="product-price">2 500 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Блок 20w HI COPY</span>
+                    <span class="product-price">1 500 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <div class="category-header airpods">
+                <span class="category-icon">🎶</span>
+                <h2>Наушники AirPods</h2>
+            </div>
+            <ul class="product-list" id="airpods">
+                <li class="product-item">
+                    <span class="product-name">AirPods 2</span>
+                    <span class="product-price">9 900 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">AirPods 4</span>
+                    <span class="product-price">10 500 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">AirPods 4 ANC</span>
+                    <span class="product-price">15 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">AirPods Pro 2 type-c</span>
+                    <span class="product-price">17 500 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <div class="category-header iphones">
+                <span class="category-icon">📱</span>
+                <h2>Смартфоны iPhone</h2>
+            </div>
+            <ul class="product-list" id="iphones">
+                <li class="product-item">
+                    <span class="product-name">iPhone 13 128GB blue</span>
+                    <span class="product-price">41 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 13 128GB black</span>
+                    <span class="product-price">40 900 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 13 128GB white</span>
+                    <span class="product-price">40 900 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 14 128GB White</span>
+                    <span class="product-price">48 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 14 128GB Blue</span>
+                    <span class="product-price">48 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 14 128GB black</span>
+                    <span class="product-price">48 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 14 256GB black</span>
+                    <span class="product-price">56 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 14 256GB purple</span>
+                    <span class="product-price">56 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 14 256GB white</span>
+                    <span class="product-price">56 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 128GB Black</span>
+                    <span class="product-price">57 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 128GB Green</span>
+                    <span class="product-price">56 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 128GB pink</span>
+                    <span class="product-price">56 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 256GB black</span>
+                    <span class="product-price">66 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 256GB blue</span>
+                    <span class="product-price">66 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 256GB green</span>
+                    <span class="product-price">66 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 256GB pink</span>
+                    <span class="product-price">66 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 15+ 128GB black</span>
+                    <span class="product-price">63 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 Pro 128GB blue</span>
+                    <span class="product-price">79 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 ProMax 256GB blue</span>
+                    <span class="product-price">89 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 15 ProMax 256GB natural</span>
+                    <span class="product-price">89 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 128GB black</span>
+                    <span class="product-price">63 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 128GB white</span>
+                    <span class="product-price">63 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 128GB pink</span>
+                    <span class="product-price">63 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 128GB ultra</span>
+                    <span class="product-price">63 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 128GB teal</span>
+                    <span class="product-price">63 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 256GB pink</span>
+                    <span class="product-price">75 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 256GB white</span>
+                    <span class="product-price">75 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 256GB black</span>
+                    <span class="product-price">76 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 256GB ultra</span>
+                    <span class="product-price">75 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 128GB natural</span>
+                    <span class="product-price">87 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 128GB desert</span>
+                    <span class="product-price">85 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 128GB black</span>
+                    <span class="product-price">86 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 128GB white</span>
+                    <span class="product-price">86 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 256GB desert</span>
+                    <span class="product-price">93 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 256GB natural</span>
+                    <span class="product-price">93 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 256GB black</span>
+                    <span class="product-price">94 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 256GB white</span>
+                    <span class="product-price">94 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 512GB black</span>
+                    <span class="product-price">112 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 512GB desert</span>
+                    <span class="product-price">112 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 512GB natural</span>
+                    <span class="product-price">112 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 512GB white</span>
+                    <span class="product-price">111 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 Pro 1TB black</span>
+                    <span class="product-price">128 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 256GB desert</span>
+                    <span class="product-price">101 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 256GB natural</span>
+                    <span class="product-price">101 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 256GB white</span>
+                    <span class="product-price">101 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 256GB black</span>
+                    <span class="product-price">101 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 512GB desert</span>
+                    <span class="product-price">120 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 512GB white</span>
+                    <span class="product-price">120 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 512GB natural</span>
+                    <span class="product-price">120 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 512GB black</span>
+                    <span class="product-price">121 000 ₽</span>
+                </li>
+                
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 1TB natural</span>
+                    <span class="product-price">140 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 1TB white</span>
+                    <span class="product-price">142 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPhone 16 ProMax 1TB desert</span>
+                    <span class="product-price">143 000 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <div class="category-header watches">
+                <span class="category-icon">⌚️</span>
+                <h2>Apple Watch</h2>
+            </div>
+            <ul class="product-list" id="watches">
+                <li class="product-item">
+                    <span class="product-name">SE 2023 40mm black</span>
+                    <span class="product-price">19 700 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">SE 2023 40mm silver</span>
+                    <span class="product-price">20 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">SE2 2023 44mm silver</span>
+                    <span class="product-price">22 500 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">SE2 2023 44mm star</span>
+                    <span class="product-price">22 500 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">SE2 2023 44mm black</span>
+                    <span class="product-price">22 500 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">10 42mm gold</span>
+                    <span class="product-price">32 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">10 42mm black</span>
+                    <span class="product-price">32 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">10 46mm silver</span>
+                    <span class="product-price">34 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">10 46mm gold</span>
+                    <span class="product-price">34 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">10 46mm black</span>
+                    <span class="product-price">34 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Aw ultra2 black(2024)</span>
+                    <span class="product-price">67 000 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <div class="category-header ipads">
+                <span class="category-icon">💻</span>
+                <h2>Планшеты iPad</h2>
+            </div>
+            <ul class="product-list" id="ipads">
+                <li class="product-item">
+                    <span class="product-name">iPad 9 256GB</span>
+                    <span class="product-price">30 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPad 10 256GB</span>
+                    <span class="product-price">38 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">iPad 11 256GB</span>
+                    <span class="product-price">41 500 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Air 6 11 128GB</span>
+                    <span class="product-price">48 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Air 6 11 256GB</span>
+                    <span class="product-price">61 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Pro11 m4 256GB</span>
+                    <span class="product-price">82 000 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="disclaimer">
+            <h3>❗️ Важная информация</h3>
+            <p>✅ Цена напрямую зависит от дефицита товара и от курса $</p>
+            <p>✅Цены указаны с максимальной скидкой и только за наличный расчёт!</p>
+            <p>✅Цены в кредит или рассрочку узнаем отдельно.</p>
+            <p>✅ В случае отсутствия какой либо позиции в наличии, ожидание после заказа 1-2дня!</p>
+        </div>
+        
+        <div class="contact-info">
+            <h3>Контакты</h3>
+            <p>📌 Телеграмм: <a href="https://t.me/topdevice777" target="_blank">@topdevice777</a></p>
+            <p>📌 WhatsApp: <a href="https://wa.me/79788930777" target="_blank">+7 978 893 07 77</a></p>
+            <p>📌 Адрес: Красногвардейское ул.Советская 10</p>
+            <p>📌 Отправка по Крыму автобусом или курьерская доставка</p>
+            <p>📌 Ежедневно с 8:00 до 18:00</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 TopDevice. Все права защищены.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search');
+            const productItems = document.querySelectorAll('.product-item');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                productItems.forEach(item => {
+                    const productName = item.querySelector('.product-name').textContent.toLowerCase();
+                    
+                    if (productName.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                        item.classList.add('highlight');
+                        
+                        // Scroll to the first highlighted item
+                        if (document.querySelectorAll('.highlight').length === 1) {
+                            item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    } else {
+                        item.style.display = 'none';
+                        item.classList.remove('highlight');
+                    }
+                });
+                
+                // Show all categories even if empty during search
+                document.querySelectorAll('.category').forEach(category => {
+                    const visibleItems = category.querySelectorAll('.product-item[style="display: flex;"]').length;
+                    if (visibleItems === 0 && searchTerm.length > 0) {
+                        category.style.display = 'none';
+                    } else {
+                        category.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Clear highlights when search is cleared
+            searchInput.addEventListener('search', function() {
+                if (this.value === '') {
+                    productItems.forEach(item => {
+                        item.classList.remove('highlight');
+                        item.style.display = 'flex';
+                    });
+                    
+                    document.querySelectorAll('.category').forEach(category => {
+                        category.style.display = 'block';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
